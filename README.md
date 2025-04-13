@@ -26,11 +26,11 @@ pip install -r requirements.txt
 ```
 
 
-### Create a `.env` file in the root directory and add your Pinecone & openai credentials as follows:
+### Create a `.env` file in the root directory and add your Pinecone & Gemini API credentials as follows:
 
 ```ini
 PINECONE_API_KEY = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-OPENAI_API_KEY = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+GEMINI_API_KEY = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 ```
 
 
@@ -49,6 +49,28 @@ Now,
 open up localhost:
 ```
 
+## Deployment on Render
+
+This project is configured for easy deployment on Render.
+
+### Steps to deploy on Render:
+
+1. Fork or push this repository to your GitHub account
+2. Go to [Render](https://render.com/) and create an account if you don't have one
+3. Click on "New +" and select "Web Service"
+4. Connect your GitHub account and select this repository
+5. Configure the deployment with the following settings:
+   - Name: dr-bera (or any name you prefer)
+   - Runtime: Python
+   - Build Command: `pip install -r requirements.txt`
+   - Start Command: `gunicorn app:app`
+6. Add your environment variables:
+   - PINECONE_API_KEY = Your Pinecone API key
+   - GEMINI_API_KEY = Your Google Gemini API key
+7. Select the plan (Free tier works fine)
+8. Click "Create Web Service"
+
+Render will automatically deploy your application. After a few minutes, your Dr. Bera chatbot will be available at the URL provided by Render.
 
 ### Techstack Used:
 

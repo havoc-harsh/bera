@@ -2,8 +2,14 @@ from flask import Flask, request
 from flask_cors import CORS
 import os
 from dotenv import load_dotenv
+from src.check_env import check_environment
 
+# Load environment variables from .env file if it exists
 load_dotenv()
+
+# Check if all required environment variables are set
+if not check_environment():
+    print("WARNING: Application may not function correctly without all required environment variables.")
 
 # Retrieve needed environment variables
 PINECONE_API_KEY = os.environ.get('PINECONE_API_KEY')
@@ -71,4 +77,6 @@ def home():
     return "Server is running."
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=8080, debug=True) 
+    # Use environment variable for port with a default of 8080
+    port = int(os.environ.get("PORT", 8080))
+    app.run(host="0.0.0.0", port=port) 
