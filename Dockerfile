@@ -4,6 +4,13 @@ WORKDIR /app
 
 COPY . /app
 
-RUN pip install -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
-CMD ["python3", "app.py"]
+# Set environment variables
+ENV PORT=8080
+
+# Expose the port the app runs on
+EXPOSE ${PORT}
+
+# Command to run the application with gunicorn
+CMD gunicorn --bind 0.0.0.0:${PORT} app:app
